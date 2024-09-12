@@ -1,5 +1,5 @@
 class HitCounter {
-    private Deque<Integer> hits;
+    Deque<Integer> hits;
     public HitCounter() {
         hits = new LinkedList<>();
     }
@@ -13,7 +13,6 @@ class HitCounter {
             hits.pollFirst();
         }
         return hits.size();
-    
     }
 }
 
