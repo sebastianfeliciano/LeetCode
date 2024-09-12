@@ -3,7 +3,7 @@ class Solution {
         int highestNumber = 0;
         List<Boolean> k = new ArrayList<>();
         for(int number : candies){
-            if(number > highestNumber) highestNumber = number;
+            highestNumber = Math.max(number, highestNumber);
         }
         for(int i = 0; i < candies.length; i++){
             if(candies[i] + extraCandies >= highestNumber){
