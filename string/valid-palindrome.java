@@ -3,6 +3,7 @@ class Solution {
         s = s.toLowerCase();
         s = s.trim();
         s = s.replaceAll("[^a-z0-9]", "");
+        
         if(s == null) return false;
         int a_pointer = 0;
         int b_pointer = s.length() - 1;
