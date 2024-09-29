@@ -24,6 +24,7 @@ class Solution {
 
         while(leftPointer < rightPointer && rightPointer <= s.length()){
             System.out.println("Window From : " +leftPointer+ " to " + rightPointer);
+
             for(int i = leftPointer; i <= rightPointer - 1; i++){
                 mapOfWindow.put(listOfGiven[i], mapOfWindow.getOrDefault(listOfGiven[i], 0) + 1);
             }
