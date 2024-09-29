@@ -5,40 +5,42 @@ class Solution {
         Map<Character, Integer> mapOfWindow = new HashMap<>();
         Map<Character, Integer> mapOfResult = new HashMap<>();
 
-
-        char[] list = p.toCharArray();
-        char[] listOfGiven = s.toCharArray();
-
-
-        for(int i = 0; i < list.length; i++){
-            mapOfResult.put(list[i], mapOfResult.getOrDefault(list[i], 0) + 1);
+        if (s.length() < p.length()) {
+            return result;
         }
 
-
-        for(Map.Entry<Character, Integer> entry : mapOfResult.entrySet()){
-            System.out.println(entry.getKey() + ";" +entry.getValue());
+        for (char ch : p.toCharArray()) {
+            mapOfResult.put(ch, mapOfResult.getOrDefault(ch, 0) + 1);
         }
 
-        int leftPointer = 0;
-        int rightPointer = windowSize;
+        // Initialize the sliding window with the first "windowSize" characters of s
+        for (int i = 0; i < windowSize; i++) {
+            char ch = s.charAt(i);
+            mapOfWindow.put(ch, mapOfWindow.getOrDefault(ch, 0) + 1);
+        }
 
-        while(leftPointer < rightPointer && rightPointer <= s.length()){
-            System.out.println("Window From : " +leftPointer+ " to " + rightPointer);
+        // Check the first window
+        if (mapOfWindow.equals(mapOfResult)) {
+            result.add(0);
+        }
 
-            for(int i = leftPointer; i <= rightPointer - 1; i++){
-                mapOfWindow.put(listOfGiven[i], mapOfWindow.getOrDefault(listOfGiven[i], 0) + 1);
+        // Start sliding the window across the string s
+        for (int i = windowSize; i < s.length(); i++) {
+            // Add the new character (rightPointer)
+            char newChar = s.charAt(i);
+            mapOfWindow.put(newChar, mapOfWindow.getOrDefault(newChar, 0) + 1);
+
+            // Remove the old character (leftPointer)
+            char oldChar = s.charAt(i - windowSize);
+            mapOfWindow.put(oldChar, mapOfWindow.get(oldChar) - 1);
+            if (mapOfWindow.get(oldChar) == 0) {
+                mapOfWindow.remove(oldChar);
             }
 
-            if(mapOfResult.equals(mapOfWindow)){
-                result.add(leftPointer);
+            if (mapOfWindow.equals(mapOfResult)) {
+                result.add(i - windowSize + 1);
             }
-
-            mapOfWindow.clear();
-
-            leftPointer++;
-            rightPointer++;
         }
-
 
         return result;
     }
