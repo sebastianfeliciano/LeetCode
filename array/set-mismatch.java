@@ -3,7 +3,7 @@ class Solution {
         int a_pointer = 0;
         int b_pointer =1;
 
-        while(a_pointer < nums.length && b_pointer < nums.length){
+        while(a_pointer < nums.length - 1 && b_pointer < nums.length){
             if(nums[a_pointer] == nums[b_pointer]){
                 return new int[]{nums[a_pointer],nums[a_pointer]+1};
             } else {
